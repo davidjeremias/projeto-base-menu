@@ -1,0 +1,30 @@
+<!-- header -->
+<header>
+  <div class="ui-g padding">
+
+    <div class="ui-g-1">
+      <h1>
+        <a href="/home" title="">Caixa</a>
+      </h1>
+    </div>
+
+    <div class="ui-g-5">  
+      <h2><strong></strong>{{ title }}<span class="nav_title_detail"></span></h2>         
+    </div>
+
+    <div class="ui-g-5">
+        <h2 style="padding-right: 15px; float: right" *ngIf="userName">Olá, <strong >{{ userName }}</strong><span class="nav_title_detail" *ngIf="userMatricula"> ({{ userMatricula }})</span></h2>
+    </div>
+
+    <div class="ui-g-1">
+      <ul>
+        <li class="item-sair" style="cursor: pointer"><a (click)="logoff()" title="Sair">Sair</a></li>   
+      </ul>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- /header -->
+

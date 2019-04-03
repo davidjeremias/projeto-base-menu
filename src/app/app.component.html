@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="ui-g">
+    <div class="ui-g-2 menu-padding">
+
+        <div class="left menu" [ngClass]="{'menu-lateral': ativaMenu == true}">
+            <div class="item item-menu div-principal" (click)="ativarMenu()">
+                <i class="glyphicon glyphicon-th-list margen-icon"></i>
+                <span class="margem-label">Menu Principal</span>
+            </div>
+
+            <li *ngFor="let menu of menuAtual">
+                    <a [routerLink]="menu.url" title="" [routerLinkActiveOptions]="{exact:false}" [routerLinkActive]="['active']">
+                        <div class="item item-menu">
+                            <i class="{{menu.icon}} margen-icon"></i>
+                            <span class="margem-label">{{menu.text}}</span>
+                            <i [ngClass]="{'glyphicon glyphicon-menu-down' : !(!menu?.submenu?.length)
+                                , 'margen-icon-submenu' : !(!menu?.submenu?.length)}"></i>
+                        </div>
+                    </a>
+                        <ul [ngClass]="{'submenu' : menu?.submenu?.length !== 0}" >
+                            <li *ngFor="let subMenu of menu.submenu">
+                                <a [routerLink]="subMenu.url" title="" [routerLinkActiveOptions]="{exact:false}" [routerLinkActive]="['active']">
+                                    <div class="item-submenu">
+                                        <span class="margem-label-submenu">{{subMenu.text}}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                </li>
+
+        </div>
+
+    </div>
+
+<div class="ui-g-10">   
+ <div class="pagina-principal"> 
+    <main>
+        <div class="conteudo">      
+            <section style="width: 100%">
+                <router-outlet></router-outlet>         
+            </section>
+        </div>
+    </main>
+</div>
+</div>
+</div>
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<app-footer></app-footer>

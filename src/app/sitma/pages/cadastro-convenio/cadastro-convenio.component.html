@@ -1,0 +1,156 @@
+<div class="ui-g">
+  <div class="ui-g-12" *ngIf="!isDetalhamento && !isEdicao">
+    <h3 class="titulo">Cadastro Convênio</h3>
+  </div>
+  <div class="ui-g-12" *ngIf="isDetalhamento">
+    <h3 class="titulo">Detalhar Convênio</h3>
+  </div>
+  <div class="ui-g-12" *ngIf="isEdicao">
+    <h3 class="titulo">Alterar Convênio</h3>
+  </div>
+</div>
+
+<form [formGroup]="formularioDeConvenio" (ngSubmit)="salvarConvenio()">
+<div class="ui-g-12">
+  <div>
+
+    <div style="width:450px;margin-bottom:3px">
+      <div class="ui-g" style="width:400px;">
+        <div class="ui-g-6" style="margin-top: 0.0em !important;">
+          <span class="ui-float-label">
+            <p-dropdown [options]="sigla" [style]="{'width': '100%'}" [(ngModel)]="selectedSigla" formControlName="sigla" placeholder="_________________" optionLabel="nomeSistemaConvenio" [showClear]="true"  [disabled]="isDetalhamento"></p-dropdown>
+            <label style="font-size: 11px" for="float-input">Selecione o Sistema</label>
+          </span>
+        </div>
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <p-inputMask id="float-input" type="text" size="50" [(ngModel)]="convenio.cnpj" (focusout)="verificaCovenioExistente()" name="cnpj" mask="99.999.999/9999-99" placeholder="__.___.___/____-__"
+              unmask="true" slotChar=" " pKeyFilter="int" formControlName="cnpj" [disabled]="isDetalhamento"></p-inputMask>
+            <label style="font-size: 11px" for="float-input">CNPJ</label>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="width:450px;margin-bottom:3px">
+      <div class="ui-g" style="width:400px;">
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" size="20" style="height: 40px;" [attr.disabled]="isDetalhamento ? '': null" (focusout)="verificaCovenioExistente()" [(ngModel)]="convenio.codigoConvenio" formControlName="codigoConvenio"
+              pKeyFilter="int" pInputText required maxlength="6">
+            <label for="float-input">Código do Convênio</label>
+          </span>
+        </div>
+
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" type="text" size="50" style="height: 40px;" [attr.disabled]="isDetalhamento ? '': null" [(ngModel)]="convenio.nomeConvenio" formControlName="nomeConvenio"
+              pInputText required maxlength="40">
+            <label for="float-input">Nome do Convênio</label>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:450px;margin-bottom:3px">
+      <div class="ui-g" style="width:400px;">
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" type="text" size="20" style="height: 40px;" [attr.disabled]="isDetalhamento ? '': null" [(ngModel)]="convenio.codigoAgenciaCentralizadora"
+            formControlName="agenciaCentralizadora" (focusout)="buscaAgenciaCentralizadora()" pKeyFilter="int" pInputText required
+              maxlength="4">
+            <label for="float-input">Agência Centralizadora</label>
+          </span>
+        </div>
+
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" type="text" disabled size="50" style="height: 40px;" [(ngModel)]="convenio.nomeAgenciaCentralizadora"
+            formControlName="nomeAgenciaCentralizadora" pInputText required maxlength="40">
+            <label class="ui-g-12" for="float-input">Nome Agencia Centralizadora</label>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:450px;margin-bottom:10px">
+      <div class="ui-g" style="width:400px;">
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" type="text" pKeyFilter="int" size="20" style="height: 40px;" [attr.disabled]="isDetalhamento ? '': null" [(ngModel)]="convenio.codigoSr" (focusout)="buscaSuperintendenciaRegional()"
+            formControlName="codSR" pInputText required maxlength="4">
+            <label class="ui-g-12" for="float-input">Código da SR</label>
+          </span>
+        </div>
+
+        <div class="ui-g-6">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" type="text" disabled size="50" style="height: 40px;" [(ngModel)]="convenio.nomeSr" formControlName="nomeSR"
+              pInputText required maxlength="40">
+            <label class="ui-g-12" for="float-input">Nome da SR</label>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12" style="margin-bottom: 10px;">
+      <label for="float-input">Tipo de TED</label>
+      <div class="ui-g" style="width:50%;margin-bottom:10px">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-md-4" *ngFor="let ted of listaAllTipoTeds">
+              <p-checkbox formControlName="group1" name="group1" value="{{ted.id}}"  [disabled]="isDetalhamento"
+                  label="{{ted.nomeTipoTed}}" [disabled]="false" [(ngModel)]="checkListTipoTeds" inputId="id" (onChange)="setarTed(ted)"></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui-g-12" style="margin-bottom: 20px;">
+      <label for="float-input">Canal</label>
+      <div class="ui-g" style="width:50%;margin-bottom:10px">
+        <div class="ui-g-12">
+          <div class="ui-g-12 ui-md-6" *ngFor="let canal of listaAllCanais">
+              <p-checkbox formControlName="group3" name="group3" value="{{canal.id}}" [disabled]="isDetalhamento"
+                  label="{{canal.nomeCanal}}" [disabled]="false" [(ngModel)]="checkListCanais" inputId="id" (onChange)="setarCanal(canal)"></p-checkbox>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <label for="float-input">Informativo de Repasse</label>
+      <div class="ui-g" style="width:250px;margin-bottom:10px">
+        <div class="ui-g-6">
+          <p-radioButton formControlName="group2" value="S" label="Sim" [(ngModel)]="informativoRepasse" inputId="1" [disabled]="isDetalhamento"></p-radioButton>
+        </div>
+        <div class="ui-g-6">
+          <p-radioButton formControlName="group2" value="N" label="Não" [(ngModel)]="informativoRepasse" inputId="2" [disabled]="isDetalhamento"></p-radioButton>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <span class="ui-float-label">
+        <input id="float-input" type="text" size="50" style="height: 40px;" [attr.disabled]="isDetalhamento ? '': null" [(ngModel)]="numeroFloat" formControlName="float"
+          pKeyFilter="int" pInputText required maxlength="40" maxlength="3">
+        <label for="float-input">Float(dias)</label>
+      </span>
+    </div>
+
+    <div class="ui-g-12" *ngIf="!isDetalhamento">
+      <button *ngIf="!isExcluido"class="btn btn-convenio" type="button" [disabled]="!formularioDeConvenio.valid" (click)="salvarConvenio()">SALVAR</button>
+      <button *ngIf="!isDetalhamento && !isEdicao && !isExcluido" class="btn btn-convenio" type="button" (click)="clean()">LIMPAR</button>
+      <button *ngIf="isEdicao"class="btn btn-convenio" type="button" (click)="retornaTelaDeConculta()">VOLTAR</button>
+    </div>
+
+    <div class="ui-g-12" *ngIf="isDetalhamento">
+      <button *ngIf="!isExcluido"class="btn btn-convenio" type="button" (click)="editarConvenio()">ALTERAR</button>
+      <button *ngIf="!isExcluido" class="btn btn-convenio" type="button" (click)="excluirConvenio()">EXCLUIR</button>
+      <button class="btn btn-convenio" type="button" (click)="retornaTelaDeConculta()">VOLTAR</button>
+    </div>
+  </div>
+</div>
+</form>
+
+<p-confirmDialog></p-confirmDialog>

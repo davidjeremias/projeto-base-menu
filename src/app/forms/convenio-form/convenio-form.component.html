@@ -1,0 +1,78 @@
+
+<hr>
+<form #formulario="ngForm" (ngSubmit)="onSubmit()" class="form ui-g ui-fluid">
+
+  <div class="ui-g-4 p-relative">
+    <span class="ui-float-label form-group">
+      <input
+        [(ngModel)]="repasse.valor"
+        name="valor"
+        id="input-valor"
+        class="w-100"
+        type="text"
+        currencyMask
+        pInputText
+        required
+      >
+      <label for="float-input">Valor do Repasse</label>
+    </span>
+  </div>
+  
+  <span class="ui-float-label ui-g-4 form-group">
+    <p-calendar
+      [(ngModel)]="repasse.dtRepasse"
+      [minDate]="dataMinima()"
+      [locale]="globals.ptbr"
+      [showIcon]="true"
+      dateFormat="dd/mm/yy"
+      name="dtRepasse"
+      class="w-100"
+      required
+    ></p-calendar>
+    <label for="float-input">Data do Repasse</label>
+  </span>
+  <span class="ui-float-label ui-g-4 form-group">
+    <p-calendar
+      [(ngModel)]="repasse.dtRepasse"
+      [minDate]="dataMinima()"
+      [locale]="globals.ptbr"
+      [timeOnly]="true"
+      [showIcon]="true"
+      name="hrRepasse"
+      class="w-100"
+      icon="pi pi-clock"
+      required
+    ></p-calendar>
+    <label for="float-input">Hora do Repasse</label>
+  </span>
+  <span class="ui-float-label form-group ui-g-12">
+    <textarea
+      [(ngModel)]="modelo.justificativa"
+      [rows]="3"
+      name="justificativa"
+      maxlength="500"
+      class="w-100"
+      pInputTextarea
+      required
+    ></textarea>
+    <label for="float-input">Justificativa da Alteração</label>
+  </span>
+  <div class="d-flex align-items-center">
+    <button
+      [disabled]="formulario.form.invalid || isEnviando"
+      class="btn btn-success"
+      type="submit"
+    >
+      <ng-container *ngIf="!isEnviando; else loader">Salvar</ng-container>
+      <ng-template #loader>
+        <app-loader></app-loader>
+      </ng-template>
+    </button>
+    <h5
+      [hidden]="formulario.valid || formulario.untouched"
+      class="ml-2"
+    >
+      Preencha todos os campos
+    </h5>
+  </div>
+</form>

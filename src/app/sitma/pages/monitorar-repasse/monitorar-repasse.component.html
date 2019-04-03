@@ -1,0 +1,155 @@
+<div class="d-flex justify-content-between align-items-center">
+  <h1 class="t-secondary mb-1">Monitoramento de Repasse</h1>
+  <app-loader [isColorida]="true" *ngIf="isAtualizandoAuto">Atualizando Repasses</app-loader>
+  <button *ngIf="false" class="btn btn-secondary">Ajuste</button>
+</div>
+
+<div>
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Código do Convênio</th>
+        <th>Nome do Convênio</th>
+        <th>Data da Arrecadação</th>
+        <th>Agência Centralizadora</th>
+        <th>Nome do Banco</th>
+        <th>Tipo de Repasse</th>
+        <th>Valor</th>
+        <th>Data e Hora do Repasse</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody [@animated]="listaRepasses?.length" *ngIf="listaRepasses; else loadingTable">
+      <ng-container *ngFor="let repasse of listaRepasses">
+        <tr
+          [ngClass]="{
+            'color': true,
+            '': repasse.status == 'Enviado',
+            'red': repasse.status == 'Devolvido',
+            'yellow': repasse.status == 'Pendente',
+            'orange': repasse.status == 'A Verificar'
+          }"
+          (click)="toggleDetalhamento(repasse)"
+        >
+          <td>{{repasse.coCodigo}}</td>
+          <td>{{repasse.coNome}}</td>
+          <td>{{repasse.dtArrecadacao | showData}}</td>
+          <td>{{repasse.agencia}}</td>
+          <td>{{repasse.noBanco}}</td>
+          <td>{{repasse.tipo}}</td>
+          <td>{{repasse.valor | currency:'BRL'}}</td>
+          <td>{{repasse.dtRepasse | showData:'hh'}}</td>
+          <td class="ws-nowrap">{{repasse.status}}</td>
+        </tr>
+      </ng-container>
+
+    </tbody>
+  </table>
+</div>
+
+<ng-container *ngIf="detalhando">
+  <section
+    @staticAnimated
+    class="f-none row mx-0 justify-content-between wrap container-section"
+    *ngIf="!ldDetalhamento; else loading"
+    style="width: calc(100% - .69px) !important"
+  >
+    <!-- --------- Dados do Convênio --------- -->
+    <div class="px-1 pt-1 col-xs-4">
+      <h2 class="section">Dados do Convênio</h2>
+      <!-- Código do Convênio -->
+      <article class="tag-form">
+        <h2>Código</h2>
+        <p>{{repasseDetalhado.coCodigo}}</p>
+      </article>
+      <!-- Nome do Convênio -->
+      <article class="tag-form">
+        <h2>Nome</h2>
+        <p>{{repasseDetalhado.coNome}}</p>
+      </article>
+      <!-- Agência Centralizadora -->
+      <article class="tag-form">
+        <h2>Agência Centralizadora</h2>
+        <p>{{repasseDetalhado.centralizadora}}</p>
+      </article>
+    </div>
+    <!-- --------- Dados do Bancários --------- -->
+    <div class="px-1 pt-1 col-xs-4">
+      <h2 class="section">Dados Bancários</h2>
+      <!-- Número do Banco -->
+      <article class="tag-form">
+        <h2>Número do Banco</h2>
+        <p>{{repasseDetalhado.nuBanco}}</p>
+      </article>
+      <!-- Agência -->
+      <article class="tag-form">
+        <h2>Agência</h2>
+        <p>{{repasseDetalhado.agencia}}</p>
+      </article>
+      <!-- Conta Corrente -->
+      <article class="tag-form">
+        <h2>Conta Corrente</h2>
+        <p>{{repasseDetalhado.conta}}</p>
+      </article>
+      <!-- Nome do Banco -->
+      <article class="tag-form">
+        <h2>Nome do Banco</h2>
+        <p>{{repasseDetalhado.noBanco}}</p>
+      </article>
+
+    </div>
+    <!-- --------- Dados do Repasse --------- -->
+    <div class="px-1 pt-1 col-xs-4">
+      <h2 class="section">Dados do Repasse</h2>
+      <!-- Tipo de Repasse -->
+      <article class="tag-form">
+        <h2>Tipo de Repasse</h2>
+        <p>{{repasseDetalhado.tipo}}</p>
+      </article>
+      <!-- Valor do Repasse -->
+      <article class="tag-form">
+        <h2>Valor do Repasse</h2>
+        <p>{{repasseDetalhado.valor | currency:'BRL'}}</p>
+      </article>
+      <!-- Data da Arrecadação -->
+      <article class="tag-form">
+        <h2>Data da Arrecadação</h2>
+        <p>{{repasseDetalhado.dtArrecadacao | showData}}</p>
+      </article>
+      <!-- Data/Hora do Repasse -->
+      <article class="tag-form">
+        <h2>Data/Hora do Repasse</h2>
+        <p>{{repasseDetalhado.dtRepasse | showData:'hh'}}</p>
+      </article>
+    </div>
+    <!-- --------- Exclusivo Devolução --------- -->
+    <div *ngIf="repasseDetalhado.status == 'Devolvido'" class="col-xs-12">
+      <article class="alert alert-danger">
+        <h1>Motivo da Devolução</h1>
+        <p>Este repasse foi devolvido pois o valor está incorreto e o número do banco está incompatível com o cadastro
+          inicial.</p>
+        </article>
+        <div *ngIf="!devolvido">
+          <button class="btn btn-primary" (click)="devolvido = !devolvido" type="button">Editar Dados do Repasse</button>
+        </div>
+        <!--  -->
+      </div>
+      <!-- --------- Editáveis --------- -->
+      <div *ngIf="repasseDetalhado.status == 'A Verificar' || devolvido" class="w-100">
+        <app-repasse-form (repasseSalvo)="novoRepasse($event)" [modelo]="globals.copy(repasseDetalhado)"></app-repasse-form>
+      </div>
+  </section>
+  
+</ng-container>
+
+<ng-template #loading>
+  <div class="mt-3 w-100 t-align-center">
+    <img src="../../assets/images/loading.gif">
+  </div>
+</ng-template>
+
+<ng-template #loadingTable>
+  <div class="mt-3 d-table-c w-100 t-align-center">
+    <img src="../../assets/images/loading.gif">
+  </div>
+</ng-template>

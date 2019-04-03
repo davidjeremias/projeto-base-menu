@@ -1,0 +1,149 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <h3 class="titulo">Consultar Convênio</h3>
+    </div>
+</div>
+
+<div class="ui-g-12">
+    <div class="form-convenio">
+        <div style="margin-bottom: 20px;">
+            <span class="ui-float-label">
+                <input id="float-input" class="campo-input" type="text" mask="999999" size="60" [(ngModel)]="codigoConvenio"
+                    name="codigoConvenio" pInputText>
+                <label for="float-input">Código do Convênio</label>
+            </span>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <span class="ui-float-label">
+                <input id="float-input" class="campo-input" type="text" maxlength="40" size="60" [(ngModel)]="nomeConvenio" name="nomeConvenio"
+                    pInputText>
+                <label for="float-input">Nome do Convênio</label>
+            </span>
+        </div>
+        <div>
+            <button class="btn btn-convenio" (click)="consultarConvenio(codigoConvenio)" type="button">PESQUISAR</button>
+            <button class="btn btn-convenio" (click)="clear()" type="button">LIMPAR</button>
+            <button class="btn btn-convenio" (click)="cadastrar()" type="button">NOVO</button>
+        </div>
+    </div>
+
+    <div *ngIf="pesquisandoListaCodigoConvenio; else loading">
+        <div *ngIf="listaConveniosPaginada?.length">
+            <div class="ui-g">
+                <div class="ui-g-12" class="table-convenio">
+                    <p-table #table [columns]="cols" [value]="listaConveniosPaginada" [lazy]="true" [paginator]="false"
+                        [rows]="10" [totalRecords]="totalRegistros">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns" class="coluna">
+                                    {{col.header}}
+                                </th>
+                                <th class="width-acoes-rateio" class="coluna">
+                                    Ações
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-content>
+                            <tr>
+                                <td style="text-align: center;" *ngFor="let col of cols">
+                                    <span *ngIf="col.field != 'tipoTEDs' && col.field != 'dataExclusao'">
+                                        {{content[col.field]}}
+                                    </span>
+                                    <span *ngIf="col.field == 'tipoTEDs'">
+                                        <ul>
+                                            <li *ngFor="let ted of content[col.field]" style="margin-left: 40%; padding-right: 6em;">
+                                                {{ted.nomeTipoTed}}
+                                            </li>
+                                        </ul>
+                                    </span>
+                                    <span *ngIf="col.field == 'dataExclusao'">
+                                            <span *ngIf="!content[col.field]">Ativo</span>
+                                            <span *ngIf="content[col.field]">Inativo</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="ui-g" style="padding: 0">
+                                        <div class="ui-g-6" class="botoes">
+                                            <button pButton type="button" icon="glyphicon glyphicon-th-list" (click)="detelharConvenio(content)" title="Detalhar"> </button>
+                                        </div>
+                                        <div *ngIf="!content.dataExclusao" class="ui-g-6" class="botoes">
+                                            <button pButton type="button" icon="glyphicon glyphicon-pencil"  (click)="editarConvenio(content)" title="Editar"> </button>
+                                        </div>
+                                        <div *ngIf="!content.dataExclusao" class="ui-g-6" class="botoes">
+                                            <button pButton type="button" icon="glyphicon glyphicon-trash" (click)="excluirConvenioDalistaConveniosPaginada(content, paginador)" title="Excluir"> </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <p-paginator #paginador [rows]="10" [totalRecords]="totalRegistros" (onPageChange)="buscarConveniosPaginados($event)"></p-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="pesquisandoListaAll; else loading">
+        <div *ngIf="listaAllConvenios?.length">
+            <div class="ui-g">
+                <div class="ui-g-12" class="table-convenio">
+                    <p-table #tableAll [columns]="cols" [value]="listaAllConvenios" [lazy]="true" [paginator]="false"
+                        [rows]="10" [totalRecords]="totalRegistros">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns" class="coluna">
+                                    {{col.header}}
+                                </th>
+                                <th class="width-acoes-rateio" class="coluna">
+                                    Ações
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-content>
+                            <tr>
+                                <td style="text-align: center;" *ngFor="let col of cols">
+                                    <span *ngIf="col.field != 'tipoTEDs' && col.field != 'dataExclusao'">
+                                        {{content[col.field]}}
+                                    </span>
+                                    <span *ngIf="col.field == 'tipoTEDs'">
+                                        <ul>
+                                            <li *ngFor="let ted of content[col.field]" style="margin-left: 40%; padding-right: 6em;">
+                                                {{ted.nomeTipoTed}}
+                                            </li>
+                                        </ul>
+                                    </span>
+                                    <span *ngIf="col.field == 'dataExclusao'">
+                                        <span *ngIf="!content[col.field]">Ativo</span>
+                                        <span *ngIf="content[col.field]">Inativo</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="ui-g" style="padding: 0">
+                                        <div class="ui-g-6" class="botoes">
+                                            <button pButton type="button" icon="glyphicon glyphicon-th-list" (click)="detelharConvenio(content)" title="Detalhar"> </button>
+                                        </div>
+                                        <div *ngIf="!content.dataExclusao" class="ui-g-6" class="botoes">
+                                            <button pButton type="button" icon="glyphicon glyphicon-pencil"  (click)="editarConvenio(content)" title="Editar"> </button>
+                                        </div>
+                                        <div *ngIf="!content.dataExclusao" class="ui-g-6" class="botoes">
+                                            <button pButton type="button" icon="glyphicon glyphicon-trash"  (click)="excluirConvenioDalistaAllConvenios(content, paginador)" title="Excluir"> </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <p-paginator #paginador [rows]="10" [totalRecords]="totalRegistros" (onPageChange)="buscarConvenios($event)"></p-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+
+<ng-template #loading>
+    <div class="mt-3 w-100 t-align-center">
+        <img src="../../assets/images/loading.gif">
+    </div>
+</ng-template>

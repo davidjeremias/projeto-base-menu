@@ -1,0 +1,485 @@
+@font-face {
+    font-family: futura;
+    src: url('../fonts/futura/futuraBold.ttf');
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: futura;
+    src: url('../fonts/futura/futuraBook.ttf');
+    font-weight: 400;
+}
+
+body{
+    min-width: 600px;
+}
+
+main{
+    padding: 16px 0 22px !important;
+    display: block !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: futura;
+    font-weight: bolder;
+}
+
+.container{
+    margin-top: -132px;
+    padding-top: 132px;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    margin-bottom: -50px;
+}
+
+.project-item {
+    padding-left: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.project-item-alert {
+    margin-bottom: 5px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.project-item-alert-inline {
+    text-align: center !important;    
+    margin-bottom: 0px !important;
+    padding-left: 15px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    display: inline-block !important;
+}
+.project-item-inline {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    margin-bottom: 0px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+.project-item-inline a {
+    padding-bottom: 5px;
+}
+main section .alert-success strong {
+    display: initial !important;
+}
+
+.container-section {
+    padding: 1em 2em;
+    border: 1px solid rgba(0,0,0,.2);
+    border-top: none;
+}
+
+.formRegister{
+    background:white !important;
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: #54bbab;
+    padding: 20px;
+}
+.tabRegister a{
+    border-style: solid !important;
+    border-width: 1px 1px 0 1px !important;
+    border-color: #54bbab !important;
+    margin-left: 0 !important;
+    color: #54bbab !important;
+    font-weight: bold;
+}
+.tabRegister.active a,
+.tabRegister a:hover{
+    background: white !important;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+    border-color: #b3c7cb;
+}
+a:hover{
+    text-decoration: none;   
+}
+.table-click tbody tr:hover {
+    background-color: #EFF5F6 !important;
+    cursor: pointer;
+}
+.btn-center{
+    float: initial !important;
+}
+.center{
+    text-align: center !important;
+}
+
+/*--------------------RESPONSIVIDADE--------------------*/
+main section{
+    width: 100% !important;
+}
+
+@media (max-width: 1000px){
+    .nav_title_detail{
+        display: none;
+    }
+    main section{
+        width: 100% !important;
+    }
+    .content{
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+    main section{
+        width: 100% !important;
+    }
+
+    .container.principal {
+        width: 90%;
+        max-width: none;
+    }
+
+    .content.principal {
+        width: auto;
+    }
+}
+
+/*--------------------SWEET ALERT--------------------*/
+.swal-custom{
+    font-size: 16px !important;
+}
+
+/*--------------------TABLE SCROLL--------------------*/
+.table-scroll tbody{
+    display: block;
+}
+
+.table-scroll tbody{
+    overflow-y: auto;
+}
+
+.table-scroll td{
+    line-height: 0.9 !important;
+    width: 100%;
+}
+
+/*--------------------GRUPOS AD--------------------*/
+.groupRow{
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.groupRow i{
+    margin-right: 15px; 
+    color: #f9b000;
+}
+
+.width-uf {
+    width: 5% !important;
+}
+
+.width-acoes {
+    width: 7% !important;
+}
+
+/*------------------- Botões ----------------------*/
+.btn {
+    height: 45px;
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 14px;
+    font-family: futura;
+    font-weight: bolder;
+    transition: all ease .3s;
+}
+
+.btn-primary {
+    background: #fda917 ;
+    color: #fff;
+    border-color: #fda917 ;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background: #F39200;
+    border-color: #fda917 ;
+    color: #fff;
+}
+
+.btn-primary:active, .btn-primary:active:focus {
+    background: #F39200;
+    border-color: #fda917 ;
+}
+
+.btn-secondary, body .ui-button {
+    background: #005CA9 !important;
+    color: #fff;
+}
+
+.btn-secondary:hover, .btn-secondary:focus,
+body .ui-button:hover, body .ui-button:focus {
+    background: #00B5E5 !important;
+    border-color: #00B5E5 !important;
+    color: #fff;
+}
+
+/*---------- Tabela -------------*/
+.table>thead>tr>th {
+    border: none;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
+
+.table thead th {
+    font-family: futura;
+}
+
+.table thead th {
+    background: #f3f5f9;
+    font-weight: bolder;
+}
+
+.table th, .table td {
+    border: 1px solid rgba(0,0,0,.06) !important;
+    padding: 16px !important;
+}
+
+/* ------------------ Utilitários ------------------ */
+/* Formulários */
+.ui-float-label {
+    margin-top: 10px;
+}
+
+.ui-float-label>label {
+    left: 1.65em !important;
+    background: white;
+    padding: 0 5px;
+}
+
+.ui-float-label>.ui-inputtext.ui-state-filled ~ label,
+.ui-float-label .ui-inputtext:focus + label {
+    top: 0.55em !important;
+    background: white;
+    padding: 0 5px;
+}
+
+.ui-float-label>.ui-inputtext.ui-state-filled:not(.ui-inputtextarea-resizable) ~ label,
+.ui-float-label .ui-inputtext:focus:not(.ui-inputtextarea-resizable) + label {
+    top: 0.05em !important;
+}
+
+.ui-float-label>.ui-inputwrapper-filled ~ label,
+.ui-float-label>.ui-inputwrapper-focus ~ label {
+    top: .65em  !important;
+}
+
+body .ui-inputtext {
+    border-radius: 0 !important;
+    border: none !important;
+    border: 1px solid rgba(0,0,0,.2) !important;
+    transition: all ease .3s;
+    padding: 1.2em 1em .8em !important;
+    border-radius: 3px;
+}
+
+body .ui-inputtext:enabled:focus:not(.ng-invalid) {
+    border: 1px solid #005CA9 !important;
+}
+
+body .ui-inputtext:enabled:focus:not(.ng-invalid) + label,
+.ui-inputwrapper-focus + label {
+    color: #005CA9 !important;
+}
+
+.ui-inputtext.ng-invalid:not(.ng-untouched),
+p-calendar.ng-invalid:not(.ng-untouched) .ui-inputtext {
+    border-color: #e74c3c !important;
+}
+
+.ui-inputtext.ng-invalid:not(.ng-untouched) + label,
+p-calendar.ng-invalid:not(.ng-untouched):not(.ui-inputwrapper-focus) + label {
+    color: #e74c3c !important;
+}
+
+/*------------------- Tipografia ----------------------*/
+h1.section, h2.section, h3.section, h4.section, h5.section, h6.section {
+    width: 100%;
+    margin-bottom: .5em;
+    padding-bottom: .5em;
+    border-bottom: 1px solid #F9B000;
+    color: #005CA9;
+}
+
+/* Padrões de exibição */
+.tag-form, .tag-textarea {
+    margin-bottom: 1em;
+}
+
+.tag-form * {
+    display: inline-block;
+    font-size: 1.25em;
+}
+
+.tag-form *:first-child {
+    color: #3A4859;
+    margin-right: .25em;
+}
+
+.tag-form *:first-child:after,
+.tag-textarea *:first-child:after {
+    content: ':';
+}
+
+.tag-textarea {
+    padding-bottom: 1em;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+}
+
+.tag-textarea * {
+    font-size: 1.25em;
+}
+
+.tag-textarea *:first-child {
+    color: #3A4859;
+    display: block;
+}
+
+/* Div Color */
+.color.green {background: #d6ffd7}
+.color.yellow {background: #fffccc}
+.color.red {background: #ffcccc}
+.color.orange {background: #ffd79e;}
+
+/* Alerts */
+.alert {
+    font-size: 1em;
+    border: none;
+}
+
+.alert h1 {
+    margin-bottom: .55em;
+    font-size: 24px;
+}
+
+.alert p {
+    font-size: 16px;
+}
+
+.alert.alert-danger {background: #ffcccc}
+
+.alert-danger h2,
+.alert-danger title {
+    color: #c0392b !important;
+}
+
+/* Text Color */
+.t-primary {color: #F9B000}
+.t-secondary {color: #005CA9}
+.t-danger {color: #e74c3c}
+
+/* Text Align */
+.t-align-center {text-align: center}
+.t-align-left {text-align: left}
+.t-align-right {text-align: right}
+
+/* Display */
+.d-flex {display: flex !important}
+.d-none {display: none !important}
+.d-table-c {display: table-caption !important; caption-side: bottom}
+
+/* Position */
+.p-absolute {position: absolute}
+.p-relative {position: relative}
+
+/* Float */
+.f-left {float: left}
+.f-right {float: right}
+.f-none {float: none}
+
+/* Justify Content - Flex */
+.justify-content-start {justify-content: start}
+.justify-content-end {justify-content: end}
+.justify-content-center {justify-content: center}
+.justify-content-between {justify-content: space-between}
+.justify-content-around {justify-content: space-around}
+
+/* Align Itens - Flex */
+.align-items-start {align-items: flex-start}
+.align-items-end {align-items: flex-end}
+.align-items-center {align-items: center}
+.align-items-baseline {align-items: baseline}
+.align-items-stretch {align-items: stretch}
+
+/* Wrap - Flex */
+.d-flex.wrap {flex-wrap: wrap}
+
+/* Margins */
+.mt-0, .my-0 {margin-top: 0 !important}
+.mt-1, .my-1 {margin-top: 1.25em !important}
+.mt-2, .my-2 {margin-top: 2.50em !important}
+.mt-3, .my-3 {margin-top: 3.75em !important}
+.mt-4, .my-4 {margin-top: 4em !important}
+.mt-5, .my-5 {margin-top: 5.25em !important}
+
+.mr-05, .mx-05 {margin-right: 5px !important}
+.mr-0, .mx-0 {margin-right: 0 !important}
+.mr-1, .mx-1 {margin-right: 1.25em !important}
+.mr-2, .mx-2 {margin-right: 2.50em !important}
+.mr-3, .mx-3 {margin-right: 3.75em !important}
+.mr-4, .mx-4 {margin-right: 4em !important}
+.mr-5, .mx-5 {margin-right: 5.25em !important}
+
+.mb-0, .my-0 {margin-bottom: 0 !important}
+.mb-1, .my-1 {margin-bottom: 1.05em !important}
+.mb-2, .my-2 {margin-bottom: 2.25em !important}
+.mb-3, .my-3 {margin-bottom: 3.75em !important}
+.mb-4, .my-4 {margin-bottom: 4em !important}
+.mb-5, .my-5 {margin-bottom: 5.25em !important}
+
+.ml-05, .mx-05 {margin-left: 5px !important}
+.ml-0, .mx-0 {margin-left: 0 !important}
+.ml-1, .mx-1 {margin-left: 1.25em !important}
+.ml-2, .mx-2 {margin-left: 2.50em !important}
+.ml-3, .mx-3 {margin-left: 3.75em !important}
+.ml-4, .mx-4 {margin-left: 4em !important}
+.ml-5, .mx-5 {margin-left: 5.25em !important}
+
+/* Paddings */
+.pt-0 {padding-top: 0}
+.pt-1 {padding-top: 1.25em}
+.pt-2 {padding-top: 2.50em}
+.pt-3 {padding-top: 3.75em}
+.pt-4 {padding-top: 4em}
+.pt-5 {padding-top: 5.25em}
+
+.px-0 {padding-right: 0; padding-left: 0}
+.px-1 {padding-right: 1.25em; padding-left: 1.25em}
+.px-2 {padding-right: 2.50em; padding-left: 2.50em}
+.px-3 {padding-right: 3.75em; padding-left: 3.75em}
+.px-4 {padding-right: 4em; padding-left: 4em}
+.px-5 {padding-right: 5.25em; padding-left: 5.25em}
+
+/* Widths */
+.w-25 {width: 25%}
+.w-50 {width: 50%}
+.w-75 {width: 75%}
+.w-100 {width: 100%}
+
+/* Dump */
+.ws-nowrap {
+    white-space: nowrap;
+}
+
+p.spacer {
+    width: 100%;
+    margin-bottom: 2em;
+}
+
+.w-100 .ui-widget {
+    width: 100%;
+}

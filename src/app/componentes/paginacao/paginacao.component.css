@@ -1,0 +1,9 @@
+
+@media (max-height: 700px){
+    .tabela-responsiva {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    
+}

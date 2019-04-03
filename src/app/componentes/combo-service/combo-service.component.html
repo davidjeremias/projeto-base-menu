@@ -1,0 +1,6 @@
+
+  <p-dropdown [filter]="filtro" emptyFilterMessage="Nenhum registro encontrado" autoWidth="true" 
+    [options]="lista" [(ngModel)]="itemSelecionado" placeholder="Selecione..." [optionLabel]="optionLabel" [showClear]="true"
+    [disabled]="desabilitado">
+  </p-dropdown>
+<p>Item Selecionado: {{itemSelecionado ? itemSelecionado.nome : 'Nenhum'}}</p>

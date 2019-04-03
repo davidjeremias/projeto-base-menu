@@ -1,0 +1,19 @@
+.btn-padrao{
+        background: #005CA9 !important;
+        color: #fff;
+        margin-right: 3em
+}
+
+.table-convenio{
+        margin-top: 5em;
+        margin-bottom: 5em !important;
+}
+
+.botoes{
+        padding: 0;
+        margin-left: 15% !important;
+}
+
+.coluna{
+        text-align: center;
+}

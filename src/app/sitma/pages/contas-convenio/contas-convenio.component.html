@@ -1,0 +1,101 @@
+
+  <form [formGroup]="formularioDeContas" autocomplete="off">
+    <div class="ui-g-12">
+        <div style="width:450px;margin-bottom:3px">
+            <div class="ui-g" style="width:400px;">
+                <div class="ui-g-6">
+                    <span class="ui-float-label">
+                      <input id="float-input" type="text" size="20" style="height: 40px;" (focusout)="buscaBanco()" [(ngModel)]="banco.codigoFebrabanBanco" formControlName="codigoFebrabanBanco"
+                        pKeyFilter="int" pInputText required maxlength="3">
+                      <label for="float-input">Número do Banco</label>
+                    </span>
+                </div>
+          
+                  <div class="ui-g-6">
+                    <span class="ui-float-label">
+                      <input id="float-input" type="text" type="text" disabled size="45" style="height: 40px;" [(ngModel)]="banco.nomeBanco" formControlName="nomeBanco"
+                        pInputText required maxlength="100">
+                      <label for="float-input">Nome do Banco</label>
+                    </span>
+                  </div>
+            </div>
+  
+            <div class="ui-g" style="width:134%;">
+                <div class="ui-g-4">
+                    <span class="ui-float-label">
+                      <input id="float-input" type="text" size="20" style="height: 40px;" [(ngModel)]="conta.numeroAgencia" formControlName="numeroAgencia"
+                        pInputText required maxlength="8">
+                      <label for="float-input">Agência</label>
+                    </span>
+                </div>
+                
+                  <div class="ui-g-4">
+                    <span class="ui-float-label">
+                      <input id="float-input" type="text" type="text" size="20" style="height: 40px;" [(ngModel)]="conta.numeroConta" formControlName="numeroConta"
+                        pInputText required maxlength="15">
+                      <label for="float-input">Conta Corrente</label>
+                    </span>
+                  </div>
+  
+                  <div class="ui-g-4">
+                      <span class="ui-float-label">
+                        <input id="float-input" type="text" type="text" size="16" style="height: 40px;" [(ngModel)]="conta.digitoVerificador" formControlName="digitoVerificador"
+                          pKeyFilter="int" pInputText required maxlength="1">
+                        <label for="float-input">Dígito Verificador</label>
+                      </span>
+                  </div>
+            </div>
+  
+            <div class="ui-g" style="width:400px;">
+                <div class="ui-g-6">
+                    <span class="ui-float-label">
+                      <input id="float-input" type="email" size="49" style="height: 40px;" [(ngModel)]="conta.email" formControlName="email"
+                        pInputText required maxlength="40">
+                      <label for="float-input">E-mail do Convênio</label>
+                    </span>
+                </div>
+            </div>
+  
+            <div class="ui-g-12">
+              <button class="btn btn-padrao" type="button" *ngIf="!habilitaUpdate" [disabled]="!formularioDeContas.valid" (click)="adicionaConta()">ADICIONAR</button>
+              <button class="btn btn-padrao" type="button" *ngIf="habilitaUpdate" (click)="alteraConta()">ALTERAR</button>
+              <button class="btn btn-padrao" type="button" (click)="clean()">LIMPAR</button>
+
+            </div>
+    </div>
+    </div>
+  </form>
+
+  <table class="table table-active" *ngIf="contas.length > 0">
+      <thead>
+        <tr>
+            <th *ngFor="let col of cols" class="coluna">
+                {{col.header}}
+            </th>
+            <th class="width-acoes-rateio" class="coluna">
+              Ações
+            </th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let conta of contas">
+              <td class="coluna">{{ conta.banco.codigoFebrabanBanco }}</td>
+              <td>{{ conta.banco.nomeBanco }}</td>
+              <td class="coluna">{{ conta.numeroAgencia }}</td>
+              <td class="coluna">{{ conta.numeroConta }} - {{ conta.digitoVerificador }}</td>
+              <td>{{ conta.email }}</td>
+              <td class="coluna">
+                <div class="ui-g" style="padding: 0">
+                    <div class="ui-g-6" class="botoes">
+                        <button pButton type="button" (click)="preparaUpdate(conta)" icon="glyphicon glyphicon-pencil"> </button>
+                    </div>
+                    <div class="ui-g-6" class="botoes">
+                        <button pButton type="button" (click)="removeConta(conta)" icon="glyphicon glyphicon-trash"> </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+<p-confirmDialog icon="pi pi-exclamation-triangle"></p-confirmDialog>

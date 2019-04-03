@@ -1,0 +1,26 @@
+<div style="margin-top: 2%" class="tabela-responsiva">
+    <button pButton *ngIf="filtroPesquisa" type="button" label="Pesquisar" class="ui-button-rounded" (click)="pesquisar()" style="margin-bottom: 2%"></button>
+    <p-table #dt [value]="_lista" [(paginator)]="paginator" [rows]="itensPerPage" [(first)]="first" [lazy]="true"  pageLinkSize="2"
+    [loading]="loading" [totalRecords]="totalRegistros" (onLazyLoad)="paginarOrdenar($event)" [resizableColumns]="true">
+    <ng-template pTemplate="header" let-rowData>
+        <tr>
+            <th *ngFor="let col of cols" [ngClass]="col.header === 'UF'? 'width-uf' : ''" pResizableColumn>
+                <span>{{col.header}}</span>
+            </th>
+            <th class="width-acoes">
+                Ações
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-content>
+        <tr *ngIf="_lista.length">
+            <td *ngFor="let col of cols">
+                {{ !col.subfield ? content[col.field] : content[col.field][col.subfield] }}
+            </td>
+            <td>
+                <button pButton type="submit" icon="glyphicon glyphicon-pencil" (click)="editar(content)" > </button>
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>

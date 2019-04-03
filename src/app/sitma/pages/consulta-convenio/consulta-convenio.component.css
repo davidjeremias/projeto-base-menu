@@ -1,0 +1,33 @@
+.btn-convenio{
+    background: #005CA9 !important;
+    color: #fff;
+    margin-right: 1em;
+    width: 7em;
+    height: 3em;
+    padding: 0;
+}
+
+.table-convenio{
+    margin-top: 5em;
+    margin-bottom: 5em !important;
+}
+
+.coluna{
+    text-align: center;
+}
+
+.botoes{
+    padding: 0;
+    margin-left: 15% !important;
+}
+
+.campo-input{
+    width: 23em;
+    height: 40px;
+}
+
+.form-convenio{
+    width: 32%;
+    margin-left: auto;
+    margin-right: auto;
+}
