@@ -6,7 +6,7 @@
                 <div class="ui-g-6">
                     <span class="ui-float-label">
                       <input id="float-input" type="text" size="20" style="height: 40px;" (focusout)="buscaBanco()" [(ngModel)]="banco.codigoFebrabanBanco" formControlName="codigoFebrabanBanco"
-                        pKeyFilter="int" pInputText required maxlength="3">
+                        pKeyFilter="int" pInputText required maxlength="3" minlength="3">
                       <label for="float-input">Número do Banco</label>
                     </span>
                 </div>

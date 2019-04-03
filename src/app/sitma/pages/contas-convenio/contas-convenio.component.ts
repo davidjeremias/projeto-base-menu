@@ -56,10 +56,17 @@ export class ContasConvenioComponent implements OnInit {
   }
 
   buscaBanco(){
-    this.bancoService.buscaBanco(this.banco.codigoFebrabanBanco).subscribe(response => {
+    if(this.banco.codigoFebrabanBanco == undefined || this.banco.codigoFebrabanBanco.length != 3){
+      this.messageService.add({severity:'info', summary: 'Mensagem informativa:', detail:'O campo número do banco deve conter 3 digitos'});
+    }else{
+      let codigoFebrabanBanco = parseInt(this.banco.codigoFebrabanBanco, 10);
+      this.bancoService.buscaBanco(codigoFebrabanBanco.toString()).subscribe(response => {
       var resposta = response;
       this.banco.nomeBanco = resposta.nomeBanco;
     });
+      
+    }
+    
   }
 
   clean(){
